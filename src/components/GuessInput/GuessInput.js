@@ -5,13 +5,13 @@ import React from 'react';
  * the characters entered and causes minLength check to fail.
  */
 
-function GuessInput() {
-  const [guess, setGuess] = React.useState('');
+function GuessInput({ handleSubmitGuess }) {
+  const [tentativeGuess, setTentativeGuess] = React.useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.info({ guess });
-    setGuess('');
+    handleSubmitGuess(tentativeGuess);
+    setTentativeGuess('');
   }
 
   return <form
@@ -24,10 +24,10 @@ function GuessInput() {
       minLength={5}
       maxLength={5}
       title="5 letter word"
-      value={guess}
+      value={tentativeGuess}
       onChange={(e) => {
         const nextGuess = e.target.value.toUpperCase();
-        setGuess(nextGuess);
+        setTentativeGuess(nextGuess);
       }}
       type="text"
       id="guess-input"
