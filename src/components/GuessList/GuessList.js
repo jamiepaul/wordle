@@ -8,12 +8,12 @@ import Guess from '../Guess';
  * removal of guesses, reordering or manipulation in any way.
  */
 
-function GuessList({ guesses }) {
+function GuessList({ guesses, answer }) {
   const rows = range(NUM_OF_GUESSES_ALLOWED);
 
   return <div className="guess-results">
     {rows.map((row, i) => (
-      <Guess key={i} value={guesses[i]} />
+      <Guess key={i} value={guesses[i]} answer={answer} />
     ))}
   </div>;
 }

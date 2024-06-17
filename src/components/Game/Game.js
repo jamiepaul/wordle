@@ -2,6 +2,7 @@ import React from 'react';
 
 import { sample } from '../../utils';
 import { WORDS } from '../../data';
+import { NUM_OF_GUESSES_ALLOWED } from '../../constants';
 import GuessList from '../GuessList';
 import GuessInput from '../GuessInput';
 
@@ -11,15 +12,18 @@ const answer = sample(WORDS);
 console.info({ answer });
 
 function Game() {
-  const [guesses, setGuessList] = React.useState([ 'STOKE' ]);
+  const [guesses, setGuessList] = React.useState([]);
 
   const handleSubmitGuess = (tentativeGuess) => {
     setGuessList([...guesses, tentativeGuess]);
   }
 
+  const isGameEnd = guesses === NUM_OF_GUESSES_ALLOWED;
+
   return <div>
-    <GuessList guesses={guesses} />
+    <GuessList guesses={guesses} answer={answer} />
     <GuessInput handleSubmitGuess={handleSubmitGuess} />
+
   </div>;
 }
 
