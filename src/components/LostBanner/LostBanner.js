@@ -2,8 +2,11 @@ import React from 'react';
 
 import Banner from '../Banner';
 
-function LostBanner({ answer }) {
-  return <Banner status="sad">
+function LostBanner({ answer, handleRestart }) {
+  return <Banner
+    status="sad"
+    action={handleRestart}
+    >
     <p>
       Sorry, the correct answer is
       {' '}

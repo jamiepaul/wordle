@@ -188,6 +188,18 @@ h1 {
   color: white;
 }
 
+.banner-cta {
+  font-weight: bold;
+  margin-top: 16px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+
+  &:hover,
+  &:focus-visible {
+    text-decoration-style: wavy;
+  }
+}
+
 .visually-hidden {
   position: absolute;
   overflow: hidden;

@@ -11,11 +11,13 @@ import LostBanner from '../LostBanner';
 import Keyboard from '../Keyboard/Keyboard';
 
 // Pick a random word on every pageload.
-const answer = sample(WORDS);
-// To make debugging easier, we'll log the solution in the console.
-console.info({ answer });
+// const answer = sample(WORDS);
 
 function Game() {
+  const [answer, setAnswer] = React.useState(() => sample(WORDS));
+  // To make debugging easier, we'll log the solution in the console.
+  console.info({ answer });
+
   // statuses: running, won, lost
   const [gameStatus, setGameStatus] = React.useState('running');
   const [guesses, setGuessList] = React.useState([]);
@@ -31,19 +33,26 @@ function Game() {
     } else {
       setGameStatus('running');
     }
-  }
+  };
 
   const validatedGuesses = guesses.map((guess) => checkGuess(guess, answer));
+
+  const handleRestart = () => {
+    const newAnswer = sample(WORDS);
+    setAnswer(newAnswer);
+    setGuessList([]);
+    setGameStatus('running');
+  };
 
   return <div>
     <GuessList validatedGuesses={validatedGuesses} />
     <GuessInput handleSubmitGuess={handleSubmitGuess} gameStatus={gameStatus} />
     <Keyboard validatedGuesses={validatedGuesses} />
     {gameStatus === 'won' &&
-      <WonBanner guessCount={guesses.length} />
+      <WonBanner guessCount={guesses.length} handleRestart={handleRestart} />
     }
     {gameStatus === 'lost' &&
-      <LostBanner answer={answer} />
+      <LostBanner answer={answer} handleRestart={handleRestart} />
     }
   </div>;
 }
