@@ -5,7 +5,7 @@ import React from 'react';
  * the characters entered and causes minLength check to fail.
  */
 
-function GuessInput({ handleSubmitGuess }) {
+function GuessInput({ handleSubmitGuess, gameStatus }) {
   const [tentativeGuess, setTentativeGuess] = React.useState('');
 
   const handleSubmit = (e) => {
@@ -32,6 +32,7 @@ function GuessInput({ handleSubmitGuess }) {
       type="text"
       id="guess-input"
       name="guess-input"
+      disabled={gameStatus !== 'running'}
     />
   </form>;
 }
